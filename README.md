@@ -135,5 +135,12 @@ $image = ImageGenerate::generateImage('Anik');
 ## License
 This package is licensed under [MIT License](LICENSE).
 
+
+---
+
+## GitHub Repository
+You can find the GitHub repository for this package [here](https://github.com/anikrahman0/image-generator.git).
+
+
 ---
 
