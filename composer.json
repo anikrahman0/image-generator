@@ -1,0 +1,50 @@
+{
+    "name": "noobtrader/image-generator",
+    "description": "A image generator package for laravel application",
+    "keywords": [
+        "laravel",
+        "image",
+        "profile image",
+        "generator",
+        "image-generator",
+        "image-processing",
+        "php",
+        "composer"
+    ],
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Noobtrader\\Imagegenerator\\": "src/"
+        }
+    },
+    "extra":[
+        {
+            "laravel":{
+                "providers":[
+                    "Noobtrader\\Imagegenerator\\ImageGenerateServiceProvider"
+                ],
+                "aliases": {
+                    "ImageGenerate": "Noobtrader\\Imagegenerator\\Facades\\ImageGenerateFacade"
+                }
+            },
+            "resources": [
+                "resources/fonts"
+            ]
+        }
+    ],
+    "authors": [
+        {
+            "name": "Md. Anik Rahman"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^10.0 || ^11.0",
+        "illuminate/filesystem": "11.x-dev"
+    },
+    "require-dev": {
+        "orchestra/testbench": "9.x-dev"
+    }
+}
