@@ -40,8 +40,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=8.0",
-        "illuminate/support": "^10.0 || ^11.0",
-        "illuminate/filesystem": "11.0"
+        "illuminate/support": "^10.0 || ^11.0"
     },
     "require-dev": {
         "orchestra/testbench": "9.x-dev"
