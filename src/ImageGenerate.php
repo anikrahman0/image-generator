@@ -67,7 +67,7 @@ class ImageGenerate {
         // Destroy the image to free up memory
         imagedestroy($image);
 
-        return "Image generated for $name and saved to public/images/";
+        return $fileName;
     }
 
 }
