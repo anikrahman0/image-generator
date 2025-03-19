@@ -62,7 +62,7 @@ class ImageGenerate {
         if (!File::exists($imageDir)) {
             File::makeDirectory($imageDir, 0777, true, true);
         }
-        file_put_contents($imageDir . '.gitignore', "*\n!.gitignore");
+        // file_put_contents($imageDir . '.gitignore', "*\n!.gitignore");
         imagepng($image, $imageDir . $fileName);
 
         // Destroy the image to free up memory
