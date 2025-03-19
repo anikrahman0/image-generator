@@ -130,6 +130,15 @@ use ImageGenerate;
 $image = ImageGenerate::generateImage('Anik');
 ```
 
+### Git Ignore Instruction
+
+To prevent Git from tracking the generated images, add the following line to your application's `.gitignore` file:
+
+`/public/imagegenerator/images/`
+
+This ensures that dynamically generated images are not included in version control.
+
+
 ---
 
 ## License
