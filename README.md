@@ -87,7 +87,7 @@ After publishing the vendor assets, the default configuration file `profile-imag
 
 return [
     'save_img_path' => env('IMAGE_PATH', 'imagegenerator/images'),
-    'storage_disk' => env('STORAGE_DISK', 'public'), // 'local' or 'cloud'
+    'storage_disk' => env('STORAGE_DISK', 'public'), // 'public' or 'do_spaces' or 'minio' or 's3'
     'img_width' => env('IMAGE_WIDTH', 200),
     'img_height' => env('IMAGE_HEIGHT', 200),
     'font_size' => env('FONT_SIZE', 60),
