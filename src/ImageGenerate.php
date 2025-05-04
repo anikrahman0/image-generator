@@ -3,6 +3,7 @@
 namespace Noobtrader\Imagegenerator;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class ImageGenerate {
@@ -38,23 +39,40 @@ class ImageGenerate {
         imagettftext($image, $fontSize, 0, $x, $y, $textColor, $fontFile, $nameInitial);
 
         $path = trim(config('profile-imagegenerator.save_img_path'), '/');
-        $pathType = config('profile-imagegenerator.path_type', 'local');
+        $pathType = config('profile-imagegenerator.storage_disk');
         $fullFilePath = $path . '/' . $fileName;
 
-        if ($pathType === 'cloud') {
+        
+        if ($pathType === 'do_spaces' || $pathType === 's3' || $pathType === 'minio') {
             // cloud storage (disk name is same as path)
+            // Save to temporary path
             $tempPath = storage_path('app/temp/' . $fileName);
+
             if (!File::exists(dirname($tempPath))) {
                 File::makeDirectory(dirname($tempPath), 0777, true, true);
             }
 
-            imagepng($image, $tempPath);
-            imagedestroy($image);
+            imagepng($image, $tempPath); // Save image
+            imagedestroy($image); // Free up memory
+            // Upload to DigitalOcean Spaces
+            $uploaded = Storage::disk($pathType)->putFileAs(
+                '', // keep empty unless you're nesting bucket root
+                new \Illuminate\Http\File($tempPath),
+                $fullFilePath,
+                'public'
+            );
+            // dd($tempPath, $uploaded, $fullFilePath);
 
-            Storage::disk($path)->put($fileName, file_get_contents($tempPath), 'public');
+            // Optionally check upload success
+            if (!$uploaded) {
+                throw new \Exception('File upload failed');
+            }
+
+            // Delete local temp file
             File::delete($tempPath);
 
-            return Storage::disk($path)->url($fileName);
+            // Return the public URL
+            return $fullFilePath;
         } else {
             // local storage
             $localPath = public_path($fullFilePath);
